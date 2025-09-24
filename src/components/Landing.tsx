@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -10,6 +11,7 @@ import heroImage from "@/assets/sports-hero.jpg";
 
 export default function Landing() {
   const [activeTab, setActiveTab] = useState("sai");
+  const navigate = useNavigate();
 
   return (
     <div className="min-h-screen">
@@ -98,7 +100,7 @@ export default function Landing() {
                       className="bg-muted/50"
                     />
                   </div>
-                  <Button className="w-full btn-hero">
+                  <Button className="w-full btn-hero" onClick={() => navigate('/dashboard')}>
                     Access SAI Dashboard
                     <ChevronRight className="ml-2 h-4 w-4" />
                   </Button>
@@ -122,7 +124,7 @@ export default function Landing() {
                       className="bg-muted/50"
                     />
                   </div>
-                  <Button className="w-full btn-hero">
+                  <Button className="w-full btn-hero" onClick={() => navigate('/dashboard')}>
                     Access Recruiter Portal
                     <ChevronRight className="ml-2 h-4 w-4" />
                   </Button>
