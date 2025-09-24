@@ -4,6 +4,8 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { useToast } from "@/hooks/use-toast";
+import PlayerProfile from "./PlayerProfile";
 import { 
   Table, 
   TableBody, 
@@ -34,7 +36,7 @@ import {
   BarChart3
 } from "lucide-react";
 
-// Mock data for demonstration
+// Extended mock data for demonstration
 const mockPlayers = [
   {
     id: 1,
@@ -83,6 +85,258 @@ const mockPlayers = [
     pushups: 40,
     sprintTime: "12.9s",
     status: "rejected"
+  },
+  {
+    id: 5,
+    name: "Rohit Verma",
+    age: 21,
+    gender: "Male",
+    sport: "Wrestling",
+    region: "Haryana",
+    score: 94,
+    pushups: 60,
+    sprintTime: "11.2s",
+    status: "approved"
+  },
+  {
+    id: 6,
+    name: "Sneha Reddy",
+    age: 19,
+    gender: "Female",
+    sport: "Tennis",
+    region: "Telangana",
+    score: 87,
+    pushups: 38,
+    sprintTime: "13.5s",
+    status: "pending"
+  },
+  {
+    id: 7,
+    name: "Karan Joshi",
+    age: 18,
+    gender: "Male",
+    sport: "Boxing",
+    region: "Rajasthan",
+    score: 91,
+    pushups: 55,
+    sprintTime: "12.1s",
+    status: "approved"
+  },
+  {
+    id: 8,
+    name: "Meera Singh",
+    age: 20,
+    gender: "Female",
+    sport: "Athletics",
+    region: "Uttar Pradesh",
+    score: 89,
+    pushups: 42,
+    sprintTime: "12.8s",
+    status: "pending"
+  },
+  {
+    id: 9,
+    name: "Aditya Rajan",
+    age: 19,
+    gender: "Male",
+    sport: "Swimming",
+    region: "Kerala",
+    score: 93,
+    pushups: 48,
+    sprintTime: "11.9s",
+    status: "approved"
+  },
+  {
+    id: 10,
+    name: "Kavya Nair",
+    age: 17,
+    gender: "Female",
+    sport: "Badminton",
+    region: "Tamil Nadu",
+    score: 86,
+    pushups: 36,
+    sprintTime: "13.1s",
+    status: "pending"
+  },
+  {
+    id: 11,
+    name: "Suresh Kumar",
+    age: 22,
+    gender: "Male",
+    sport: "Hockey",
+    region: "Odisha",
+    score: 88,
+    pushups: 52,
+    sprintTime: "12.3s",
+    status: "approved"
+  },
+  {
+    id: 12,
+    name: "Ritika Gupta",
+    age: 18,
+    gender: "Female",
+    sport: "Volleyball",
+    region: "Delhi",
+    score: 84,
+    pushups: 34,
+    sprintTime: "13.7s",
+    status: "rejected"
+  },
+  {
+    id: 13,
+    name: "Abhishek Yadav",
+    age: 20,
+    gender: "Male",
+    sport: "Kabaddi",
+    region: "Bihar",
+    score: 87,
+    pushups: 47,
+    sprintTime: "12.6s",
+    status: "pending"
+  },
+  {
+    id: 14,
+    name: "Pooja Sharma",
+    age: 19,
+    gender: "Female",
+    sport: "Shooting",
+    region: "Himachal Pradesh",
+    score: 95,
+    pushups: 41,
+    sprintTime: "13.0s",
+    status: "approved"
+  },
+  {
+    id: 15,
+    name: "Rahul Tripathi",
+    age: 21,
+    gender: "Male",
+    sport: "Weightlifting",
+    region: "Madhya Pradesh",
+    score: 92,
+    pushups: 58,
+    sprintTime: "12.4s",
+    status: "approved"
+  },
+  {
+    id: 16,
+    name: "Deepika Singh",
+    age: 18,
+    gender: "Female",
+    sport: "Archery",
+    region: "Jharkhand",
+    score: 90,
+    pushups: 39,
+    sprintTime: "13.3s",
+    status: "pending"
+  },
+  {
+    id: 17,
+    name: "Manish Kumar",
+    age: 19,
+    gender: "Male",
+    sport: "Cricket",
+    region: "West Bengal",
+    score: 85,
+    pushups: 44,
+    sprintTime: "12.7s",
+    status: "rejected"
+  },
+  {
+    id: 18,
+    name: "Sanya Malhotra",
+    age: 17,
+    gender: "Female",
+    sport: "Gymnastics",
+    region: "Chandigarh",
+    score: 93,
+    pushups: 37,
+    sprintTime: "12.2s",
+    status: "approved"
+  },
+  {
+    id: 19,
+    name: "Vivek Sharma",
+    age: 22,
+    gender: "Male",
+    sport: "Table Tennis",
+    region: "Goa",
+    score: 89,
+    pushups: 46,
+    sprintTime: "12.5s",
+    status: "pending"
+  },
+  {
+    id: 20,
+    name: "Nisha Patel",
+    age: 20,
+    gender: "Female",
+    sport: "Cycling",
+    region: "Gujarat",
+    score: 88,
+    pushups: 43,
+    sprintTime: "12.9s",
+    status: "approved"
+  },
+  {
+    id: 21,
+    name: "Arpit Jain",
+    age: 18,
+    gender: "Male",
+    sport: "Judo",
+    region: "Assam",
+    score: 86,
+    pushups: 49,
+    sprintTime: "12.8s",
+    status: "pending"
+  },
+  {
+    id: 22,
+    name: "Tanvi Agarwal",
+    age: 19,
+    gender: "Female",
+    sport: "Squash",
+    region: "Uttarakhand",
+    score: 91,
+    pushups: 40,
+    sprintTime: "13.1s",
+    status: "approved"
+  },
+  {
+    id: 23,
+    name: "Shubham Tiwari",
+    age: 21,
+    gender: "Male",
+    sport: "Rowing",
+    region: "Chhattisgarh",
+    score: 87,
+    pushups: 51,
+    sprintTime: "12.3s",
+    status: "pending"
+  },
+  {
+    id: 24,
+    name: "Ishita Sharma",
+    age: 18,
+    gender: "Female",
+    sport: "Fencing",
+    region: "Manipur",
+    score: 89,
+    pushups: 38,
+    sprintTime: "13.4s",
+    status: "approved"
+  },
+  {
+    id: 25,
+    name: "Gaurav Singh",
+    age: 20,
+    gender: "Male",
+    sport: "Sailing",
+    region: "Andhra Pradesh",
+    score: 84,
+    pushups: 45,
+    sprintTime: "12.6s",
+    status: "rejected"
   }
 ];
 
@@ -90,12 +344,17 @@ export default function Dashboard() {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedSport, setSelectedSport] = useState("all");
   const [selectedRegion, setSelectedRegion] = useState("all");
+  const [selectedStatus, setSelectedStatus] = useState("all");
+  const [players, setPlayers] = useState(mockPlayers);
+  const [selectedPlayer, setSelectedPlayer] = useState<string | null>(null);
+  const { toast } = useToast();
 
-  const filteredPlayers = mockPlayers.filter(player => {
+  const filteredPlayers = players.filter(player => {
     const matchesSearch = player.name.toLowerCase().includes(searchTerm.toLowerCase());
     const matchesSport = selectedSport === "all" || player.sport === selectedSport;
     const matchesRegion = selectedRegion === "all" || player.region === selectedRegion;
-    return matchesSearch && matchesSport && matchesRegion;
+    const matchesStatus = selectedStatus === "all" || player.status === selectedStatus;
+    return matchesSearch && matchesSport && matchesRegion && matchesStatus;
   });
 
   const getStatusBadge = (status: string) => {
@@ -109,8 +368,70 @@ export default function Dashboard() {
     }
   };
 
+  const handlePlayerAction = (playerId: number, action: 'approve' | 'reject') => {
+    setPlayers(prev => prev.map(player => 
+      player.id === playerId 
+        ? { ...player, status: action === 'approve' ? 'approved' : 'rejected' }
+        : player
+    ));
+    
+    const player = players.find(p => p.id === playerId);
+    toast({
+      title: `Player ${action === 'approve' ? 'Approved' : 'Rejected'}`,
+      description: `${player?.name} has been ${action === 'approve' ? 'approved' : 'rejected'} successfully.`,
+      variant: action === 'approve' ? 'default' : 'destructive'
+    });
+  };
+
+  const handleMassApprove = () => {
+    const highScorers = filteredPlayers.filter(p => p.score >= 90 && p.status === 'pending');
+    setPlayers(prev => prev.map(player => 
+      highScorers.some(h => h.id === player.id)
+        ? { ...player, status: 'approved' }
+        : player
+    ));
+    
+    toast({
+      title: "Mass Approval Complete",
+      description: `${highScorers.length} high-scoring players have been approved.`,
+    });
+  };
+
+  const handleExport = () => {
+    const csvContent = "Name,Age,Gender,Sport,Region,Score,Pushups,Sprint Time,Status\n" +
+      filteredPlayers.map(p => 
+        `${p.name},${p.age},${p.gender},${p.sport},${p.region},${p.score},${p.pushups},${p.sprintTime},${p.status}`
+      ).join("\n");
+    
+    const blob = new Blob([csvContent], { type: 'text/csv' });
+    const url = window.URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'players_data.csv';
+    a.click();
+    window.URL.revokeObjectURL(url);
+    
+    toast({
+      title: "Export Complete",
+      description: "Player data has been exported successfully.",
+    });
+  };
+
+  // Calculate stats
+  const totalPlayers = players.length;
+  const approvedPlayers = players.filter(p => p.status === 'approved').length;
+  const topPerformers = players.filter(p => p.score >= 90).length;
+  const aiRecommendations = players.filter(p => p.score >= 90 && p.status === 'pending').length;
+
   return (
     <div className="min-h-screen bg-background">
+      {selectedPlayer && (
+        <PlayerProfile
+          playerId={selectedPlayer}
+          onClose={() => setSelectedPlayer(null)}
+        />
+      )}
+      
       {/* Header */}
       <header className="bg-card border-b border-card-border">
         <div className="max-w-7xl mx-auto px-6 py-4">
@@ -141,7 +462,7 @@ export default function Dashboard() {
               <Users className="h-4 w-4 text-muted-foreground" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold">1,247</div>
+              <div className="text-2xl font-bold">{totalPlayers}</div>
               <p className="text-xs text-muted-foreground">
                 <span className="text-success">+12%</span> from last month
               </p>
@@ -154,9 +475,9 @@ export default function Dashboard() {
               <CheckCircle className="h-4 w-4 text-success" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold text-success">892</div>
+              <div className="text-2xl font-bold text-success">{approvedPlayers}</div>
               <p className="text-xs text-muted-foreground">
-                71.5% approval rate
+                {totalPlayers > 0 ? Math.round((approvedPlayers / totalPlayers) * 100) : 0}% approval rate
               </p>
             </CardContent>
           </Card>
@@ -167,7 +488,7 @@ export default function Dashboard() {
               <Star className="h-4 w-4 text-accent" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold text-accent">156</div>
+              <div className="text-2xl font-bold text-accent">{topPerformers}</div>
               <p className="text-xs text-muted-foreground">
                 Score above 90
               </p>
@@ -180,7 +501,7 @@ export default function Dashboard() {
               <Activity className="h-4 w-4 text-primary" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold text-primary">43</div>
+              <div className="text-2xl font-bold text-primary">{aiRecommendations}</div>
               <p className="text-xs text-muted-foreground">
                 Ready for state program
               </p>
@@ -214,6 +535,21 @@ export default function Dashboard() {
                 </div>
 
                 <div className="space-y-2">
+                  <label className="text-sm font-medium">Status</label>
+                  <Select value={selectedStatus} onValueChange={setSelectedStatus}>
+                    <SelectTrigger>
+                      <SelectValue placeholder="Select status" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="all">All Status</SelectItem>
+                      <SelectItem value="pending">Pending</SelectItem>
+                      <SelectItem value="approved">Approved</SelectItem>
+                      <SelectItem value="rejected">Rejected</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+
+                <div className="space-y-2">
                   <label className="text-sm font-medium">Sport</label>
                   <Select value={selectedSport} onValueChange={setSelectedSport}>
                     <SelectTrigger>
@@ -225,6 +561,24 @@ export default function Dashboard() {
                       <SelectItem value="Swimming">Swimming</SelectItem>
                       <SelectItem value="Football">Football</SelectItem>
                       <SelectItem value="Badminton">Badminton</SelectItem>
+                      <SelectItem value="Wrestling">Wrestling</SelectItem>
+                      <SelectItem value="Tennis">Tennis</SelectItem>
+                      <SelectItem value="Boxing">Boxing</SelectItem>
+                      <SelectItem value="Hockey">Hockey</SelectItem>
+                      <SelectItem value="Volleyball">Volleyball</SelectItem>
+                      <SelectItem value="Kabaddi">Kabaddi</SelectItem>
+                      <SelectItem value="Shooting">Shooting</SelectItem>
+                      <SelectItem value="Weightlifting">Weightlifting</SelectItem>
+                      <SelectItem value="Archery">Archery</SelectItem>
+                      <SelectItem value="Cricket">Cricket</SelectItem>
+                      <SelectItem value="Gymnastics">Gymnastics</SelectItem>
+                      <SelectItem value="Table Tennis">Table Tennis</SelectItem>
+                      <SelectItem value="Cycling">Cycling</SelectItem>
+                      <SelectItem value="Judo">Judo</SelectItem>
+                      <SelectItem value="Squash">Squash</SelectItem>
+                      <SelectItem value="Rowing">Rowing</SelectItem>
+                      <SelectItem value="Fencing">Fencing</SelectItem>
+                      <SelectItem value="Sailing">Sailing</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
@@ -241,11 +595,31 @@ export default function Dashboard() {
                       <SelectItem value="Maharashtra">Maharashtra</SelectItem>
                       <SelectItem value="Punjab">Punjab</SelectItem>
                       <SelectItem value="Gujarat">Gujarat</SelectItem>
+                      <SelectItem value="Haryana">Haryana</SelectItem>
+                      <SelectItem value="Telangana">Telangana</SelectItem>
+                      <SelectItem value="Rajasthan">Rajasthan</SelectItem>
+                      <SelectItem value="Uttar Pradesh">Uttar Pradesh</SelectItem>
+                      <SelectItem value="Kerala">Kerala</SelectItem>
+                      <SelectItem value="Tamil Nadu">Tamil Nadu</SelectItem>
+                      <SelectItem value="Odisha">Odisha</SelectItem>
+                      <SelectItem value="Delhi">Delhi</SelectItem>
+                      <SelectItem value="Bihar">Bihar</SelectItem>
+                      <SelectItem value="Himachal Pradesh">Himachal Pradesh</SelectItem>
+                      <SelectItem value="Madhya Pradesh">Madhya Pradesh</SelectItem>
+                      <SelectItem value="Jharkhand">Jharkhand</SelectItem>
+                      <SelectItem value="West Bengal">West Bengal</SelectItem>
+                      <SelectItem value="Chandigarh">Chandigarh</SelectItem>
+                      <SelectItem value="Goa">Goa</SelectItem>
+                      <SelectItem value="Assam">Assam</SelectItem>
+                      <SelectItem value="Uttarakhand">Uttarakhand</SelectItem>
+                      <SelectItem value="Chhattisgarh">Chhattisgarh</SelectItem>
+                      <SelectItem value="Manipur">Manipur</SelectItem>
+                      <SelectItem value="Andhra Pradesh">Andhra Pradesh</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
 
-                <Button className="w-full" variant="outline">
+                <Button className="w-full" variant="outline" onClick={handleExport}>
                   <Download className="h-4 w-4 mr-2" />
                   Export Data
                 </Button>
@@ -290,11 +664,11 @@ export default function Dashboard() {
                     </CardDescription>
                   </div>
                   <div className="flex gap-2">
-                    <Button size="sm" className="bg-success hover:bg-success/90">
+                    <Button size="sm" className="bg-success hover:bg-success/90" onClick={handleMassApprove}>
                       <CheckCircle className="h-4 w-4 mr-2" />
-                      Mass Approve
+                      Mass Approve (Score ≥90)
                     </Button>
-                    <Button size="sm" variant="outline">
+                    <Button size="sm" variant="outline" onClick={() => toast({ title: "Analytics", description: "Advanced analytics feature coming soon!" })}>
                       <TrendingUp className="h-4 w-4 mr-2" />
                       Analytics
                     </Button>
@@ -339,13 +713,25 @@ export default function Dashboard() {
                         <TableCell>{getStatusBadge(player.status)}</TableCell>
                         <TableCell>
                           <div className="flex items-center gap-1">
-                            <Button size="sm" variant="ghost">
+                            <Button size="sm" variant="ghost" onClick={() => setSelectedPlayer(player.id.toString())}>
                               <Eye className="h-4 w-4" />
                             </Button>
-                            <Button size="sm" variant="ghost" className="text-success">
+                            <Button 
+                              size="sm" 
+                              variant="ghost" 
+                              className="text-success hover:bg-success/20"
+                              onClick={() => handlePlayerAction(player.id, 'approve')}
+                              disabled={player.status === 'approved'}
+                            >
                               <CheckCircle className="h-4 w-4" />
                             </Button>
-                            <Button size="sm" variant="ghost" className="text-destructive">
+                            <Button 
+                              size="sm" 
+                              variant="ghost" 
+                              className="text-destructive hover:bg-destructive/20"
+                              onClick={() => handlePlayerAction(player.id, 'reject')}
+                              disabled={player.status === 'rejected'}
+                            >
                               <XCircle className="h-4 w-4" />
                             </Button>
                           </div>
